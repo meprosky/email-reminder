@@ -1,0 +1,16 @@
+[Unit]
+Description=SSTU watchdog
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/screen -dmS e-reminder /usr/bin/python3 /home/user/reminder/email-reminder.py
+ExecStop=/usr/bin/screen -XS e-reminder quit
+Restart=on-failure
+WorkingDirectory=/home/user/reminder
+User=prosky
+Group=prosky
+GuessMainPID=no
+
+[Install]
+WantedBy=multi-user.target
